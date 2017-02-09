@@ -1,0 +1,10 @@
+
+.help-block {
+    font-size: 12px;
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+

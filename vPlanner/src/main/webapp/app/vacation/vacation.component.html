@@ -1,0 +1,98 @@
+<div class="vacations" *ngFor="let vacation of vacations">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-12">
+				<h3>Vacation: {{vacation.start}} - {{vacation.end}}</h3>
+			</div>
+
+			<div class="col-md-12">
+				<p>Before your vacation less than a month. Please start asking your customer to approve vacation. If your vacation have been approved by the customer you should register customer approve.</p>
+			</div>
+			<div class="col-md-12 pull-right">
+				<button type="button" class="btn btn-primary"
+					(click)="openCustomerApproveDialog(vacation.id)"
+					label="RegisterApprove">Register Approve</button>
+			</div>
+		</div>
+	</div>
+	<hr>
+</div>
+<div *ngIf="vacations.length<1"><h3>Before your vacation more than a month</h3></div>
+
+
+
+<p-dialog header="Customer Approve" [(visible)]="customerApproveDialogVisible"
+	[responsive]="true" showEffect="fade" [modal]="false" closable="true" closeOnEscape="true">
+<div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="customer">
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="firstName">First Name</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<input pInputText id="firstName" [(ngModel)]="customer.firstName" />
+		</div>
+	</div>
+
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="lastName">Last Name</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<input pInputText id="lastName" [(ngModel)]="customer.lastName" />
+		</div>
+	</div>
+	
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="email">Email</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<input pInputText id="email" [(ngModel)]="customer.email" />
+		</div>
+	</div>
+	
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="response">Response</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<input pInputText id="response" [(ngModel)]="customer.response" />
+		</div>
+	</div>
+
+</div>
+<footer>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<button type="button" pButton icon="fa-close" (click)="closeCustomerApprove()"
+			label="Close"></button>
+		<button type="button" pButton icon="fa-check" (click)="registerCustomerApprove()"
+			label="Register approve"></button>
+	</div>
+</footer> </p-dialog>
+
+<p-dialog header="Vacation Info" [(visible)]="infoDialogVisible"
+	[responsive]="true" showEffect="fade" [modal]="false" closable="true" closeOnEscape="true">
+<div class="ui-grid ui-grid-responsive ui-fluid">
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-12">
+		<div *ngIf="infoType == 'Error'" class="alert alert-danger" role="alert">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Error:</span>
+  		{{infoDialogText}}
+	</div>
+
+	<div *ngIf="infoType == 'Success'" class="alert alert-success" role="alert">
+  			<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Success:</span>
+  		{{infoDialogText}}
+	</div>
+		</div>
+	</div>
+
+</div>
+<footer>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<button type="button" pButton (click)="closeInfoDialog()"
+			label="Ok"></button>
+	</div>
+</footer> </p-dialog>

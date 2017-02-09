@@ -1,0 +1,124 @@
+<h3>
+	<span class="label label-default">{{currentDisplay}}</span>
+</h3>
+<div class="calendarNavigation">
+	<a class="year" href="javascript:void(0)" (click)="goToOneYearAgo(fc)">{{date.getFullYear()-1}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 0)">{{monthNames[0]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 1)">{{monthNames[1]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 2)">{{monthNames[2]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 3)">{{monthNames[3]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 4)">{{monthNames[4]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 5)">{{monthNames[5]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 6)">{{monthNames[6]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 7)">{{monthNames[7]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 8)">{{monthNames[8]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 9)">{{monthNames[9]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 10)">{{monthNames[10]}}</a>
+	<a href="javascript:void(0)" (click)="goToMonth(fc, 11)">{{monthNames[11]}}</a>
+	<a class="year" href="javascript:void(0)"
+		(click)="goToOneYearForward(fc)">{{date.getFullYear()+1}}</a>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+		<p class="currentUser">
+		</p>
+	</div>
+	<div class="col-md-9">
+		<p-schedule #fc [events]="events" [height]="height" [header]="header" [eventLimit]="4"
+			[editable]="true" (onDayClick)="handleDayClick($event)"
+			(onEventClick)="handleEventClick($event)"></p-schedule>
+	</div>
+</div>
+
+<div class="jumbotron calendar-panel">
+<div class="row button-row">
+	<div class="col-md-12">
+		<button type="button" class="btn btn-success" (click)="getVacations()">Vacations</button>
+		<button type="button" class="btn btn-warning"
+			(click)="getVacationsPlans()">Vacation Plans</button>
+		<button type="button" class="btn btn-primary pull-right"
+			(click)="saveVacations()">Save Changes</button>
+	</div>
+</div>
+</div>
+<p-dialog header="Event " [(visible)]="dialogVisible"
+	[responsive]="true" showEffect="fade" [modal]="false" closable="true" closeOnEscape="true">
+<div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
+        <div *ngIf="error" class="alert alert-danger" role="alert">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Error:</span>
+  		{{error}}
+	</div>
+	
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="vin">Title</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<p>{{event.title}}</p>
+		</div>
+	</div>
+	
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="description">Description</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<input pInputText id="description" [(ngModel)]="event.description" />
+		</div>
+	</div>
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="start">Start</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<p-inputMask id="start" mask="9999-99-99" [(ngModel)]="event.start"
+				placeholder="99/99/9999" slotChar="yyyy-mm-dd"></p-inputMask>
+		</div>
+	</div>
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-4">
+			<label for="end">End</label>
+		</div>
+		<div class="ui-grid-col-8">
+			<p-inputMask id="end" mask="9999-99-99" [(ngModel)]="event.end"
+				placeholder="Optional" slotChar="yyyy-mm-dd"></p-inputMask>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<button type="button" pButton icon="fa-close" (click)="deleteEvent()"
+			label="Delete"></button>
+		<button type="button" pButton icon="fa-check" (click)="saveEvent()"
+			label="Save"></button>
+	</div>
+</footer> </p-dialog>
+
+<p-dialog header="Vacation Info" [(visible)]="infoDialogVisible"
+	[responsive]="true" showEffect="fade" [modal]="false" closable="true" closeOnEscape="true">
+<div class="ui-grid ui-grid-responsive ui-fluid">
+	<div class="ui-grid-row">
+		<div class="ui-grid-col-12">
+		<div *ngIf="infoType == 'Error'" class="alert alert-danger" role="alert">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Error:</span>
+  		{{infoDialogText}}
+	</div>
+
+	<div *ngIf="infoType == 'Success'" class="alert alert-success" role="alert">
+  			<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Success:</span>
+  		{{infoDialogText}}
+	</div>
+		</div>
+	</div>
+
+</div>
+<footer>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<button type="button" pButton (click)="closeInfoDialog()"
+			label="Ok"></button>
+	</div>
+</footer> </p-dialog>

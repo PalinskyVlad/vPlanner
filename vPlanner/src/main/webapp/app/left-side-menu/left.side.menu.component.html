@@ -1,0 +1,26 @@
+<h2>vPlanner</h2>
+<ul>
+	<li *ngIf="!authorizationService.isAuthorize()"><a
+		[routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span>
+			Log in</a></li>
+	<li *ngIf="authorizationService.isAuthorize()"><a
+		[routerLink]="['/login']"><span
+			class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
+	<div *ngIf="authorizationService.isEmployee()">
+		<li><a [routerLink]="['/calendar']"><span
+				class="glyphicon glyphicon-list-alt"></span> Calendar</a></li>
+		<li><a [routerLink]="['/vacation']"><span
+				class="glyphicon glyphicon-file"></span> Vacation</a></li>
+	</div>
+
+	<div *ngIf="authorizationService.isManager()">
+		<li><a [routerLink]="['/statements']"><span
+				class="glyphicon glyphicon-pencil"></span> Statements</a></li>
+		<li><a [routerLink]="['/employees']"><span
+				class="glyphicon glyphicon-list"></span> Employees</a></li>
+	</div>
+	<li *ngIf="authorizationService.isAuthorize()"><a
+		[routerLink]="['/profile']"><span class="glyphicon glyphicon-user"></span>
+			Profile</a></li>
+</ul>

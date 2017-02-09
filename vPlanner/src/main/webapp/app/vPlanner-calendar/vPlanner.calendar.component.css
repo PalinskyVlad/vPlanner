@@ -1,0 +1,51 @@
+ul.calendarNavigation {
+	margin: 0 auto;
+	text-align: center;
+}
+
+ul.calendarNavigation li {
+	display: inline;
+	margin-right: 5px;
+}
+
+.currentUser {
+	padding-bottom:20px
+}
+
+ul.calendarNavigation li.year {
+	margin-right: 15px;
+}
+
+div.calendarNavigation {
+	margin: 0 auto;
+	text-align: center;
+}
+
+a.year {
+	margin-right: 15px;
+	margin-left: 15px;
+}
+.button-row {
+	margin-top: 5px;
+}
+.calendar-panel {
+	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 10px;
+}
+.color-square {
+	height: 20px;
+	width: 20px;
+	display: inline-block;
+	
+}
+.green {
+	background-color: green;
+}
+
+.red {
+	background-color: red;
+}
+

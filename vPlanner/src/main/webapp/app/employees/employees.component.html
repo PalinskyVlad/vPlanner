@@ -1,0 +1,17 @@
+    
+<div class="container top">
+<div class="row">
+		<div *ngFor="let employee of employees" class="col-md-12">
+		<div class="row staffInfo">
+			<div class="col-md-12 employeeName">
+				{{employee.firstName}}  {{employee.lastName}} 
+			</div>
+
+			<div class="col-md-3"><img src='../../image/employee.png' class="height-100"></div>
+			<div class="col-md-9">
+				<p>Email: {{employee.email}}</p>
+			</div>
+		</div>
+		</div>
+</div>
+</div>    

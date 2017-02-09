@@ -1,0 +1,42 @@
+<div class="statement" *ngFor="let statement of statements">
+	<div class="row">
+		<div class="col-md-2">
+			<img src='../../image/employee.png' class="height-100">
+		</div>
+		<div class="col-md-10">
+			<div class="col-md-12 employeeName">
+				<p>{{statement?.employee?.firstName}}
+					{{statement?.employee?.lastName}}</p>
+			</div>
+
+			<div class="col-md-12"
+				*ngFor="let vacationPlan of statement.vacationPlans">
+				<p>From {{vacationPlan.start}} to {{vacationPlan.end}}</p>
+			</div>
+			<div *ngIf="statement?.employee?.id == employeeId">
+				<div *ngIf="infoType == 'Error'" class="alert alert-danger"
+					role="alert">
+					<span class="glyphicon glyphicon-exclamation-sign"
+						aria-hidden="true"></span> <span class="sr-only">Error:</span>
+					{{info}}
+				</div>
+
+				<div *ngIf="infoType == 'Success'" class="alert alert-success"
+					role="alert">
+					<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+					<span class="sr-only">Success:</span> {{info}}
+				</div>
+			</div>
+			<div class="col-md-12 pull-right">
+				<button type="button" class="btn btn-success"
+					(click)="approveVacationPlans(statement?.employee?.id)"
+					label="Approve">Approve</button>
+				<button type="button" class="btn btn-danger"
+					(click)="rejectVacationPlans(statement?.employee?.id)"
+					label="Reject">Reject</button>
+			</div>
+		</div>
+	</div>
+	<hr>
+</div>
+<div *ngIf="statements.length<1"><h3>List of statements is empty</h3></div>
